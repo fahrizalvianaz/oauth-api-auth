@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
+
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("/test")
 public class TestController {
 
-
-    @GetMapping("/login")
-    private ResponseEntity<?> login(){
-        return ResponseEntity.ok(BaseResponse.success("login World"));
+    @GetMapping("/")
+    private ResponseEntity<?> test(){
+        return ResponseEntity.ok(BaseResponse.success("Hello World"));
     }
+
+
 }

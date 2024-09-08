@@ -2,19 +2,24 @@ package com.project.oauth.auth.controller;
 
 
 import com.project.oauth.auth.dto.BaseResponse;
+import com.project.oauth.auth.dto.login.LoginRequestDto;
+import com.project.oauth.auth.service.AuthenticationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/auth")
 public class AuthController {
 
-    @GetMapping("/")
-    private ResponseEntity<?> test(){
-        return ResponseEntity.ok(BaseResponse.success("Hello World"));
+
+    @Autowired
+    AuthenticationService authenticationService;
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto){
+        return ResponseEntity.ok(BaseResponse.success(authenticationService.login(loginRequestDto)));
     }
-
-
 }

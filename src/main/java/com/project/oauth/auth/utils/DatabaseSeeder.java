@@ -4,9 +4,12 @@ package com.project.oauth.auth.utils;
 
 import com.project.oauth.auth.model.Role;
 import com.project.oauth.auth.model.RolePath;
+import com.project.oauth.auth.model.Users;
 import com.project.oauth.auth.repository.RolePathRepository;
 import com.project.oauth.auth.repository.RoleRepository;
+import com.project.oauth.auth.repository.UsersRepository;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @Component
 @Service
@@ -31,10 +36,24 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Autowired
     private RoleRepository roleRepository;
 
+    @Autowired
+    UsersRepository usersRepository;
+
 
     @Autowired
     private RolePathRepository rolePathRepository;
 
+    private String defaultPassword = "password";
+
+    private String[] users = new String[]{
+            "admin@mail.com:ROLE_SUPERUSER ROLE_USER ROLE_ADMIN",
+            "user@mail.com:ROLE_USER"
+    };
+
+    private String[] clients = new String[]{
+            "my-client-apps:ROLE_READ ROLE_WRITE", // mobile
+            "my-client-web:ROLE_READ ROLE_WRITE" // web
+    };
 
     private String[] roles = new String[] {
             "ROLE_SUPERUSER:user_role:^/.*:GET|PUT|POST|PATCH|DELETE|OPTIONS",
@@ -83,6 +102,5 @@ public class DatabaseSeeder implements ApplicationRunner {
             roleRepository.save(oldRole);
         }
     }
-
 }
 
