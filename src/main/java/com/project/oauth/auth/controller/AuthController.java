@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/auth")
-public class TestController {
+@RequestMapping("/test")
+public class AuthController {
 
-
-    @GetMapping("/login")
-    private ResponseEntity<?> login(){
-        return ResponseEntity.ok(BaseResponse.success("login World"));
+    @GetMapping("/")
+    private ResponseEntity<?> test(){
+        return ResponseEntity.ok(BaseResponse.success("Hello World"));
     }
+
+
 }
