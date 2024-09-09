@@ -15,7 +15,7 @@ public class TestController {
 
     @GetMapping("/")
     private ResponseEntity<?> test(){
-        return ResponseEntity.ok(BaseResponse.success("Hello World"));
+        return ResponseEntity.ok(BaseResponse.success("Hello World", "Success"));
     }
 
 

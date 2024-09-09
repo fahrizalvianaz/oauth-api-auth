@@ -20,8 +20,8 @@ public class BaseResponse<T> {
     private T data;
     private Boolean status;
 
-    public static <T> BaseResponse<T> success(T data) {
-        return new BaseResponse<>(200, "Success", data, true);
+    public static <T> BaseResponse<T> success(T data, String message) {
+        return new BaseResponse<>(200, message, data, true);
     }
 
     public static <T> BaseResponse<T> failed(Integer code, String message) {

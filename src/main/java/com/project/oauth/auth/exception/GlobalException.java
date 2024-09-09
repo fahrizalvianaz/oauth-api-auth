@@ -15,4 +15,6 @@ public class GlobalException {
         return ResponseEntity.status(exception.getStatusCode())
                 .body(BaseResponse.failed(exception.getStatusCode().value(), exception.getReason()));
     }
+
+
 }

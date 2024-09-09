@@ -2,6 +2,7 @@ package com.project.oauth.auth.service.impl;
 
 import com.project.oauth.auth.model.Users;
 import com.project.oauth.auth.repository.UsersRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.User;
@@ -14,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class UserDetailServiceImpl implements UserDetailsService {
 
 
@@ -23,7 +25,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
+        log.info("Load user by username {}", username);
         Optional<Users> user = Optional.ofNullable(usersRepository.findByUsername(username)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND, "Username not found " + username

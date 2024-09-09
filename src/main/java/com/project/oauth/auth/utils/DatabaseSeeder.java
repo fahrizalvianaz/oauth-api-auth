@@ -68,6 +68,12 @@ public class DatabaseSeeder implements ApplicationRunner {
     @Transactional
     public void run(ApplicationArguments applicationArguments) {
         this.insertRoles();
+        Users user = new Users();
+        user.setUsername("user");
+        user.setPassword("$2a$12$ropNanHtYdMoMaYcq7nN9eFHFSVF3rMfF13W3vjtLnRuc2r2IrEjy");
+        user.setEnabled(true);
+        user.setEmail("user@gmail.com");
+        usersRepository.save(user);
     }
 
     @Transactional
