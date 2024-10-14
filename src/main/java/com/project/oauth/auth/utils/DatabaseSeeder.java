@@ -70,7 +70,7 @@ public class DatabaseSeeder implements ApplicationRunner {
         this.insertRoles();
         Users user = new Users();
         user.setUsername("user");
-        user.setPassword("$2a$12$ropNanHtYdMoMaYcq7nN9eFHFSVF3rMfF13W3vjtLnRuc2r2IrEjy");
+        user.setPassword("$2a$12$k/t1aUVSZpuQjBpuSQht1OdZ6vkjMHRRWEbSu7eof0Ii9nNyOHpWy");
         user.setEnabled(true);
         user.setEmail("user@gmail.com");
         usersRepository.save(user);

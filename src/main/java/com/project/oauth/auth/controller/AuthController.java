@@ -22,7 +22,6 @@ public class AuthController {
     AuthenticationService authenticationService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto){
-        log.info("Load user by username auth {}", loginRequestDto.getUsername());
         return ResponseEntity.ok(BaseResponse.success(authenticationService.login(loginRequestDto), "Login Success"));
     }
 }

@@ -9,10 +9,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
-
 import static org.hibernate.query.sqm.tree.SqmNode.log;
 
 
@@ -24,15 +25,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     AuthenticationManager authenticationManager;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     @Override
     public Object login(LoginRequestDto loginRequestDto) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword())
         );
-        log.info("Authentication : {}", authentication);
+
+        log.info("Authentication : {}", authentication.getPrincipal());
+//        if(passwordEncoder.matches(loginRequestDto.getPassword(), authentication.getDetails() )
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return authentication.getPrincipal();
+
     }
 
     @Override
@@ -44,4 +51,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     public void logout(String token) {
 
     }
+
+
+
 }

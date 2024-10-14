@@ -64,6 +64,8 @@ public class SecurityConfig {
         return provider;
     }
 
+
+
     @Bean
     public AuthenticationManager authenticationManager() {
         List<AuthenticationProvider> providers = Arrays.asList(
@@ -72,5 +74,4 @@ public class SecurityConfig {
         );
         return new ProviderManager(providers);
     }
-
 }
